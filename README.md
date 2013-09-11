@@ -75,11 +75,11 @@ Nodes
 
     sudo vmbuilder kvm ubuntu -o -c vmbuilder/slave1.cfg -d kvm-slave1
     #Start vm and login
-    knife bootstrap slave1.jenkins.thuis -x verhoes --sudo --run-list "role[jenkins-slave]"
+    knife bootstrap slave1.priv.thuis -x verhoes --sudo --run-list "role[jenkins-slave]"
  
     sudo vmbuilder kvm ubuntu -o -c vmbuilder/slave2.cfg -d kvm-slave2
     #Start vm and login
-    knife bootstrap slave2.jenkins.thuis -x verhoes --sudo --run-list "role[jenkins-slave]"
+    knife bootstrap slave2.priv.thuis -x verhoes --sudo --run-list "role[jenkins-slave]"
 
 Chef repo
 ---------
