@@ -8,8 +8,8 @@ Machines:
 - virtualization machine, will host virtual machines
 - chef server, provisioning server (vm)
 - jenkins, jenkins master build server (vm)
-- slave1, jenkins slave (vm)
-- slave2, jenkins slave (vm)
+- slave1, jenkins slave, behind nat (vm)
+- slave2, jenkins slave, behind nat (vm)
 (- windows 7, jenkins slave (vm)
 (- mac mini, jenkins slave, not dedicated)
 
@@ -22,24 +22,32 @@ openvswitch on vmhost with http://blog.scottlowe.org/2012/08/17/installing-kvm-a
 
 See http://www.cryptocracy.com/blog/2012/05/12/bootstrapping-chef/ and https://github.com/borjasotomayor/demogrid/ http://confluence.globus.org/display/DEMOGRID/Running+with+ubuntu-vm-builder
 
+Follow instructions in links above to install openvswitch and libvirt followed by:
+
+    apt-get install python-vm-builder
+
+
 Add domain to hosts in libvirt nat networks:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     sudo virsh net-edit default
     #insert
-    <domain name='jenkins.thuis'/>    
+    <domain name='priv.thuis'/>    
     
     sudo virsh net-destroy default
     sudo virsh net-start default
 
 Resolve hosts in nat network:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    echo 'prepend domain-name-servers 192.168.100.1;' >> /etc/dhcp/dhclient.conf
-    # Also add it to /etc/resolv.conf so you don't need to reboot
+Virtualization machine can resolv nat networked machines, adding nat dns to /etc/resolv.conf causes deadlock.
+It must be done manually for each nat machine.
 
-Follow instructions in links above to install openvswitch and libvirt followed by:
+Find nat machines ip and at it to /etc/hosts:
 
-    apt-get install python-vm-builder
-
+    dig @192.168.100.1 slave1.priv.thuis
+    sudo nano /etc/hosts
+    # Add 192.168.100.32 slave1.priv.thuis
 
 Chef server
 -----------
