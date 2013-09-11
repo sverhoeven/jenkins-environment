@@ -81,6 +81,8 @@ Nodes
     #Start vm and login
     knife bootstrap slave2.priv.thuis -x verhoes --sudo --run-list "role[jenkins-slave]"
 
+Goto http://jenkins.thuis to add a job.
+
 Chef repo
 ---------
 
