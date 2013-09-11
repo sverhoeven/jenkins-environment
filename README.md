@@ -7,15 +7,15 @@ See http://www.cryptocracy.com/blog/2012/05/12/bootstrapping-chef/ and https://g
 
 Add dnsmasq dns to dhcp client
   
-  echo 'prepend domain-name-servers 192.168.100.1;' >> /etc/dhcp/dhclient.conf
-  # Also add it to /etc/resolv.conf to prevent reboot
+    echo 'prepend domain-name-servers 192.168.100.1;' >> /etc/dhcp/dhclient.conf
+    # Also add it to /etc/resolv.conf to prevent reboot
 
-  apt-get install python-vm-builder 
+    apt-get install python-vm-builder 
 
 Chef server
 -----------
 
-  sudo vmbuilder kvm ubuntu -o -c vmbuilder/chef-server.cfg -d kvm-chef-server
+    sudo vmbuilder kvm ubuntu -o -c vmbuilder/chef-server.cfg -d kvm-chef-server
 
 Start vm and login
 
@@ -24,23 +24,23 @@ Goto https://chef.thuis login as admin:p@ssw0rd1
 Chef workstation
 ----------------
 
-# Install chef workstation on vmhost
-#copy /etc/chef-server/admin.pem + /etc/chef-server/chef-validator.pem from chef.thuis to vmhost.thuis:~/.chef
+Install chef workstation on vmhost
+copy /etc/chef-server/admin.pem + /etc/chef-server/chef-validator.pem from chef.thuis to vmhost.thuis:~/.chef
   
-  . vmbuilder/chef-workstation.sh
+    . vmbuilder/chef-workstation.sh
 
 Nodes
 -----
 
-  sudo vmbuilder kvm ubuntu -o -c vmbuilder/slave1.cfg -d kvm-slave1
-  #Start vm and login
-  # from vmhost
-  # add slave1 to /etc/hosts
-  knife bootstrap slave1.thuis -x verhoes --sudo
-
-  sudo vmbuilder kvm ubuntu -o -c vmbuilder/jenkins.cfg -d kvm-jenkins
-  #Start vm and login
-  knife bootstrap jenkins.thuis -x verhoes --sudo
+    sudo vmbuilder kvm ubuntu -o -c vmbuilder/slave1.cfg -d kvm-slave1
+    #Start vm and login
+    # from vmhost
+    # add slave1 to /etc/hosts
+    knife bootstrap slave1.thuis -x verhoes --sudo
+ 
+    sudo vmbuilder kvm ubuntu -o -c vmbuilder/jenkins.cfg -d kvm-jenkins
+    #Start vm and login
+    knife bootstrap jenkins.thuis -x verhoes --sudo
 
 Cookbooks
 ---------
