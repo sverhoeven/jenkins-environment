@@ -42,11 +42,10 @@ Nodes
     #Start vm and login
     knife bootstrap jenkins.thuis -x verhoes --sudo
 
-Cookbooks
+Chef repo
 ---------
 
-Create octopus cookbook
-
+See https://github.com/sverhoeven/jenkins-chef-repo
 
 
 
