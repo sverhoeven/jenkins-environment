@@ -47,6 +47,12 @@ Chef repo
 
 See https://github.com/sverhoeven/jenkins-chef-repo
 
+Hints
+-----
+
+Update all nodes with:
+   
+    knife ssh 'name:*' 'sudo chef-client'
 
 
 
