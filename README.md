@@ -6,14 +6,15 @@ Overview
 
 Machines:
 - virtualization machine, will host virtual machines
-- chef server, provisioning server (vm)
-- jenkins, jenkins master build server (vm)
-- slave1, jenkins slave, behind nat (vm)
-- slave2, jenkins slave, behind nat (vm)
-(- windows 7, jenkins slave (vm)
-(- mac mini, jenkins slave, not dedicated)
+- chef server, provisioning server, bridged vm
+- jenkins, jenkins master build server, exclusive usage, bridged vm
+- ubuntu1, jenkins slave, natted vm
+- slurm1, slurm controller + grid engine exec + jenkins slave, natted vm
+- gridengine1, grid engine master + slurm compute + jenkins slave, natted vm
+(- windows 7, jenkins slave, exclusive usage, natted vm)
+(- mac mini, jenkins slave, exclusive usage, not dedicated)
 
-Jenkins machine will be set to exclusive usage, so all builds will be done on slaves.
+Nodes set to exclusive usage, will only run jenkins jobs have specified them.
 
 Virtualization machine
 ----------------------
@@ -34,6 +35,8 @@ Add domain to hosts in libvirt nat networks:
     #insert
     <domain name='priv.thuis'/>    
     
+Restart 'default' network:    
+
     sudo virsh net-destroy default
     sudo virsh net-start default
 
@@ -73,10 +76,12 @@ Nodes
     #Start vm and login
     knife bootstrap jenkins.thuis -x verhoes --sudo --run-list "role[jenkins-master]"
 
+
     sudo vmbuilder kvm ubuntu -o -c vmbuilder/slave1.cfg -d kvm-slave1
     #Start vm and login
     knife bootstrap slave1.priv.thuis -x verhoes --sudo --run-list "role[jenkins-slave]"
- 
+
+
     sudo vmbuilder kvm ubuntu -o -c vmbuilder/slave2.cfg -d kvm-slave2
     #Start vm and login
     knife bootstrap slave2.priv.thuis -x verhoes --sudo --run-list "role[jenkins-slave]"
