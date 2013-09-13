@@ -1,5 +1,5 @@
 curl -L https://www.opscode.com/chef/install.sh | sudo bash
-git clone git@github.com:sverhoeven/jenkins-chef-repo.git /home/stefanv/jenkins-chef-repo
+git clone --recurse-submodules git@github.com:sverhoeven/jenkins-chef-repo.git /home/stefanv/jenkins-chef-repo
 
 cat <<EOF | knife configure --initial
 

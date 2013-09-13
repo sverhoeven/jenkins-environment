@@ -70,11 +70,12 @@ copy /etc/chef-server/admin.pem + /etc/chef-server/chef-validator.pem from chef.
 
 
 Test with `knife user list`.
+Upload the cookbooks and roles.
 
 Jenkins
 =======
 
-    sudo vmbuilder kvm ubuntu -o -c vmbuilder/jenkins.cfg -d kvm-jenkins
+    sudo vmbuilder kvm ubuntu -o -c vmbuilder/jenkins.cfg -d kvm-jenkins --part /home/stefanv/vmbuilder/jenkins.part
     #Start vm and login
     knife bootstrap jenkins.esciencecenter.local -x stefanv --sudo --run-list "role[jenkins-master]"
 
