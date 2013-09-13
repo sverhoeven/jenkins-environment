@@ -42,7 +42,7 @@ Restart 'default' network:
 Resolve hosts in nat network
 ----------------------------
 
-Virtualization machine can resolv nat networked machines, adding nat dns to /etc/resolv.conf causes deadlock.
+Virtualization machine can't resolv nat networked machines, adding nat dns to /etc/resolv.conf causes circular dependency failure.
 It must be done manually for each nat machine.
 
 Find nat machines ip and at it to /etc/hosts:
@@ -58,13 +58,13 @@ Chef server
 
 Start vm and login
 
-Goto https://chef.thuis login as admin:p@ssw0rd1
+Goto https://chef.esciencecenter.local login as admin:p@ssw0rd1
 
 Chef workstation
 ================
 
 Install chef workstation on vmhost
-copy /etc/chef-server/admin.pem + /etc/chef-server/chef-validator.pem from chef.thuis to vmhost.thuis:~/.chef
+copy /etc/chef-server/admin.pem + /etc/chef-server/chef-validator.pem from chef.esciencecenter.local to vmhost.esciencecenter.local:~/.chef
   
     . vmbuilder/chef-workstation.sh
 
@@ -73,7 +73,7 @@ Jenkins
 
     sudo vmbuilder kvm ubuntu -o -c vmbuilder/jenkins.cfg -d kvm-jenkins
     #Start vm and login
-    knife bootstrap jenkins.thuis -x stefanv --sudo --run-list "role[jenkins-master]"
+    knife bootstrap jenkins.esciencecenter.local -x stefanv --sudo --run-list "role[jenkins-master]"
 
 Goto http://jenkins.esciencetest.nl
 

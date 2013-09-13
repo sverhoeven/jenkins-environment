@@ -3,7 +3,7 @@ git clone git://github.com/opscode/chef-repo.git
 
 cat <<EOF | knife configure --initial
 
-https://chef.thuis:443
+https://chef.esciencecenter.local:443
 admin
 chef-validator
 /home/stefanv/.chef/chef-validator.pem
