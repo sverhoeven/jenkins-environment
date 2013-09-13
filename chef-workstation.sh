@@ -6,8 +6,8 @@ cat <<EOF | knife configure --initial
 https://chef.thuis:443
 admin
 chef-validator
-/home/verhoes/.chef/chef-validator.pem
-/home/verhoes/chef-repo
+/home/stefanv/.chef/chef-validator.pem
+/home/stefanv/chef-repo
 EOF
 
 chmod go-rw .chef/*

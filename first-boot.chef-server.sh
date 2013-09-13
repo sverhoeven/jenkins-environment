@@ -2,7 +2,7 @@
 # It is ran as root.
 
 # Expire the user account
-passwd -e verhoes
+passwd -e stefanv
 
 # Regenerate ssh keys
 rm /etc/ssh/ssh_host*key*
