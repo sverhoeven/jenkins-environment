@@ -68,6 +68,9 @@ copy /etc/chef-server/admin.pem + /etc/chef-server/chef-validator.pem from chef.
   
     . vmbuilder/chef-workstation.sh
 
+
+Test with `knife user list`.
+
 Jenkins
 =======
 

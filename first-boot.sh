@@ -8,3 +8,4 @@ passwd -e stefanv
 rm /etc/ssh/ssh_host*key*
 dpkg-reconfigure -fnoninteractive -pcritical openssh-server
 
+echo '145.100.61.17 chef.esciencecenter.local chef' >> /etc/hosts
