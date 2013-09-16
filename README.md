@@ -47,9 +47,9 @@ It must be done manually for each nat machine.
 
 Find nat machines ip and at it to /etc/hosts:
 
-    dig @192.168.100.1 ubuntu1.internal.esciencetest.nl
+    dig @192.168.122.1 ubuntu1.internal.esciencetest.nl
     sudo nano /etc/hosts
-    # Add 192.168.100.32 ubuntu1.internal.esciencetest.nl
+    # Add 192.168.122.32 ubuntu1.internal.esciencetest.nl
 
 Use Virtio disks
 ----------------
@@ -83,7 +83,7 @@ copy /etc/chef-server/admin.pem + /etc/chef-server/chef-validator.pem from chef.
 
 
 Test with `knife user list`.
-Upload the cookbooks and roles.
+Upload the environment, cookbooks and roles.
 
 Jenkins
 =======
@@ -91,7 +91,7 @@ Jenkins
     sudo vmbuilder kvm ubuntu -o -c vmbuilder/jenkins.cfg -d kvm-jenkins --part /home/stefanv/vmbuilder/jenkins.part
     #Start vm and login
     virsh autostart jenkins 
-    knife bootstrap jenkins.esciencecenter.local -x stefanv --sudo --run-list "role[jenkins-master]"
+    knife bootstrap jenkins.esciencecenter.local -E jenkins -x stefanv --sudo --run-list "role[jenkins-master]"
 
 Goto http://jenkins.esciencetest.nl
 
@@ -101,21 +101,24 @@ Primary jenkins slave
     sudo vmbuilder kvm ubuntu -o -c vmbuilder/ubuntu1.cfg -d kvm-ubuntu1
     #Start vm and login
     virsh autostart ubuntu1
-    knife bootstrap ubuntu1.internal.esciencetest.nl -x stefanv --sudo --run-list "role[jenkins-slave]"
+    knife bootstrap ubuntu1.internal.esciencetest.nl -E jenkins -x stefanv --sudo --run-list "role[jenkins-slave]"
 
 Batch queue nodes
 =================
 
-    sudo vmbuilder kvm ubuntu -o -c vmbuilder/slurm1.cfg -d kvm-slurm1
+    sudo vmbuilder kvm ubuntu -o -c vmbuilder/slurm2.cfg -d kvm-slurm2
     #Start vm and login
-    virsh autostart slurm1
-    knife bootstrap slurm1.internal.esciencetest.nl -x stefanv --sudo --run-list "role[jenkins-slave],role[slurm-controller],role['gridengine-exec]"
+    virsh autostart slurm2
+    knife bootstrap slurm2.internal.esciencetest.nl -E jenkins -x stefanv --sudo --run-list "role[jenkins-slave],role[slurm-controller],role['gridengine-exec]"
 
 
     sudo vmbuilder kvm ubuntu -o -c vmbuilder/gridengine1.cfg -d kvm-gridengine1
     #Start vm and login
     virsh autostart gridengine1
-    knife bootstrap gridengine1.internal.esciencetest.nl -x stefanv --sudo --run-list "role[jenkins-slave],role[gridengine-master],role[slurm-compute]"
+    knife bootstrap gridengine1.internal.esciencetest.nl -E jenkins -x stefanv --sudo --run-list "role[jenkins-slave],role[gridengine-master],role[gridengine-exec],role[slurm-compute]"
+    # after exec hosts are added the master should be updated 
+    knife ssh "role:gridengine-master" "sudo chef-client"
+
 
 Chef repo
 ---------
