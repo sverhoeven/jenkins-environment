@@ -14,3 +14,5 @@ EOF
 
 chmod go-rw ~/.chef/*
 
+# Add default encryption key 
+echo "secret_file '/home/stefanv/vmbuilder/encrypted_data_bag_secret'" >> ~/.chef/knife.rb

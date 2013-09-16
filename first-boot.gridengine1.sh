@@ -9,5 +9,8 @@ rm /etc/ssh/ssh_host*key*
 dpkg-reconfigure -fnoninteractive -pcritical openssh-server
 
 echo '145.100.61.17 chef.esciencecenter.local chef' >> /etc/hosts
+
 # Gridengine does not want 127.0.1.1 to resolve the hostname, but it's real ip.
-echo `hostname -I` `hostname -f` >> /etc/hosts
+# see /usr/lib/gridengine/gethostname
+echo `hostname -I` `hostname -f` `hostname` >> /etc/hosts
+perl -pi -e 's/127.0.1.1/#127.0.1.1/' /etc/hosts

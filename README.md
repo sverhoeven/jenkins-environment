@@ -51,6 +51,18 @@ Find nat machines ip and at it to /etc/hosts:
     sudo nano /etc/hosts
     # Add 192.168.100.32 ubuntu1.internal.esciencetest.nl
 
+Use Virtio disks
+----------------
+
+In `/etc/vmbuilder/libvirt/libvirtxml.tmpl` replace `<target dev='hd$disk.devletters()' />` with `<target dev='vd$disk.devletters()' bus='virtio' />`.
+In `/usr/share/pyshared/VMBuilder/plugins/ubuntu/fiesty.py` replace `disk_prefix = 'sd'` with `disk_prefix = 'vd'`.
+
+Create chef secret key
+----------------------
+
+    openssl rand -base64 512 > encrypted_data_bag_secret
+    chmod go-rw encrypted_data_bag_secret
+
 Chef server
 ===========
 
