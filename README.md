@@ -67,6 +67,7 @@ Chef server
 ===========
 
     sudo vmbuilder kvm ubuntu -o -c vmbuilder/chef-server.cfg -d kvm-chef-server
+    virsh autostart chef
 
 Start vm and login
 
@@ -89,6 +90,7 @@ Jenkins
 
     sudo vmbuilder kvm ubuntu -o -c vmbuilder/jenkins.cfg -d kvm-jenkins --part /home/stefanv/vmbuilder/jenkins.part
     #Start vm and login
+    virsh autostart jenkins 
     knife bootstrap jenkins.esciencecenter.local -x stefanv --sudo --run-list "role[jenkins-master]"
 
 Goto http://jenkins.esciencetest.nl
@@ -98,6 +100,7 @@ Primary jenkins slave
 
     sudo vmbuilder kvm ubuntu -o -c vmbuilder/ubuntu1.cfg -d kvm-ubuntu1
     #Start vm and login
+    virsh autostart ubuntu1
     knife bootstrap ubuntu1.internal.esciencetest.nl -x stefanv --sudo --run-list "role[jenkins-slave]"
 
 Batch queue nodes
@@ -105,11 +108,13 @@ Batch queue nodes
 
     sudo vmbuilder kvm ubuntu -o -c vmbuilder/slurm1.cfg -d kvm-slurm1
     #Start vm and login
+    virsh autostart slurm1
     knife bootstrap slurm1.internal.esciencetest.nl -x stefanv --sudo --run-list "role[jenkins-slave],role[slurm-controller],role['gridengine-exec]"
 
 
     sudo vmbuilder kvm ubuntu -o -c vmbuilder/gridengine1.cfg -d kvm-gridengine1
     #Start vm and login
+    virsh autostart gridengine1
     knife bootstrap gridengine1.internal.esciencetest.nl -x stefanv --sudo --run-list "role[jenkins-slave],role[gridengine-master],role[slurm-compute]"
 
 Chef repo
