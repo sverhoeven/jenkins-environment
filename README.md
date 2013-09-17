@@ -132,5 +132,11 @@ Update all nodes with a certain role with:
    
     knife ssh 'role:jenkins-master' 'sudo chef-client'
 
+Create new cookbook with:
+
+    berks cookbook --foodcritic --license=apachev2 --maintainer="Netherlands eScience Center" --maintainer-email=info@esciencecenter.nl --scmversion octopus
+    # add cookbook to repo
+
+
 
 
