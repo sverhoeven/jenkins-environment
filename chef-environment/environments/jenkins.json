@@ -1,0 +1,52 @@
+{
+  "name": "jenkins",
+  "description": "Jenkins environment",
+  "cookbook_versions": {
+  },
+  "json_class": "Chef::Environment",
+  "chef_type": "environment",
+  "default_attributes": {
+    "jenkins": {
+      "server": {
+        "url": "http://145.100.61.22/"
+      }
+    },
+    "octopus": {
+      "config": {
+        "test.ssh.location": "gridengine1.internal.esciencetest.nl",
+        "test.ssh.gateway": "slurm2.internal.esciencetest.nl",
+	"test.gridengine.location": "gridengine1.internal.esciencetest.nl",
+        "test.gridengine.default.queue": "default",
+        "test.gridengine.queue.wait.time": "default,slow",
+        "test.slurm.location": "slurm2.internal.esciencetest.nl",
+        "test.slurm.default.queue": "mypartition",
+        "test.slurm.queues": "mypartition,otherpartition"
+      }
+    },
+    "gengine": {
+      "master": "gridengine1.internal.esciencetest.nl"
+    },
+    "slurm": {
+      "control_machine": "slurm2",
+      "nodes": [{
+        "name": "slurm2",
+        "cpus": 2
+      }, {
+        "name": "gridengine1",
+        "cpus": 2
+      }],
+      "partitions": {
+        "all": {
+          "nodes": ["slurm2", "gridengine1"],
+          "default": "YES"
+        },
+        "high": {
+          "nodes": ["slurm2"],
+          "default": "NO"
+        }
+      }
+    }
+  },
+  "override_attributes": {
+  }
+}

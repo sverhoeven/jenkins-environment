@@ -1,0 +1,22 @@
+{
+  "name": "jenkins-slave",
+  "description": "",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+	"role[base]",
+        "recipe[git]",
+        "recipe[octopus]",
+        "recipe[ant]",
+        "recipe[jenkins::node]",
+        "recipe[github-private]"
+  ],
+  "env_run_lists": {
+  }
+}
+
+

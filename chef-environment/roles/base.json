@@ -1,0 +1,26 @@
+{
+  "name": "base",
+  "description": "Base role for a server",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+    "ntp": {
+      "servers": ["0.pool.ntp.org", "1.pool.ntp.org", "2.pool.ntp.org"]
+    },
+    "java": {
+      "oracle": {
+        "accept_oracle_download_terms": true
+      },
+      "jdk_version": 7
+    }
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "recipe[openssh]",
+    "recipe[ntp]"
+  ],
+  "env_run_lists": {
+  }
+}
+

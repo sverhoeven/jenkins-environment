@@ -1,0 +1,48 @@
+{
+   "env_run_lists" : {},
+   "run_list" : [
+      "role[base]",
+      "recipe[gengine]"
+   ],
+   "json_class" : "Chef::Role",
+   "chef_type" : "role",
+   "override_attributes" : {},
+   "name" : "gridengine-master",
+   "description" : "Grid engine master",
+   "default_attributes" : {
+      "gengine" : {
+         "parallel_environments" : {
+            "round" : {
+               "slots" : 99999,
+               "allocation_rule" : "$round_robin"
+            },
+            "smp" : {
+               "slots" : 2
+            },
+            "bi" : {
+               "slots" : 99999,
+               "allocation_rule" : "2"
+            },
+            "fillup" : {
+               "slots" : 99999,
+               "allocation_rule" : "$fill_up"
+            }
+         },
+         "queues" : {
+            "default" : {
+               "hostlist" : "@allhosts",
+               "pe_list" : "smp round fillup bi"
+            },
+            "slow" : {
+               "hostlist" : "@allhosts"
+            }
+         },
+         "role" : "master",
+         "host_groups" : {
+            "allhosts" : {
+               "search": "role:gridengine-exec"
+            }
+         }
+      }
+   }
+}

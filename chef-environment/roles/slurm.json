@@ -1,0 +1,13 @@
+{
+   "env_run_lists" : {},
+   "run_list" : [
+      "recipe[slurm::default]"
+   ],
+   "json_class" : "Chef::Role",
+   "chef_type" : "role",
+   "override_attributes" : {},
+   "name" : "slurm",
+   "description" : "Slurm node",
+   "default_attributes" : {
+   }
+}

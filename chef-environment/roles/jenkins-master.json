@@ -1,0 +1,81 @@
+{
+  "name": "jenkins-master",
+  "description": "Jenkins master",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+    "jenkins": {
+       "server": {
+           "plugins": [
+                    "analysis-collector",
+                    "analysis-core",
+                    "checkstyle",
+                    "cobertura",
+                    "compact-columns",
+                    "conditional-buildstep",
+                    "console-column-plugin",
+                    "copyartifact",
+                    "create-fingerprint",
+                    "delta-cloud",
+                    "disk-usage",
+                    "email-ext",
+                    "envinject",
+                    "external-monitor-job",
+                    "findbugs",
+                    "ghprb",
+                    "git",
+                    "git-client",
+                    "github",
+                    "github-api",
+                    "greenballs",
+                    "htmlpublisher",
+                    "jacoco",
+                    "jclouds-jenkins",
+                    "jobConfigHistory",
+                    "job-dsl",
+                    "job-exporter",
+                    "libvirt-slave",
+                    "mailer",
+                    "mask-passwords",
+                    "maven-info",
+                    "maven-invoker-plugin",
+                    "nodejs",
+                    "parameterized-trigger",
+                    "pmd",
+                    "promoted-builds",
+                    "publish-over-ssh",
+                    "repository",
+                    "ruby-runtime",
+                    "run-condition",
+                    "shiningpanda",
+                    "slave-setup",
+                    "sonar",
+                    "tasks",
+                    "token-macro",
+                    "translation",
+                    "violations",
+                    "warnings",
+                    "xunit",
+                    "xvfb"
+           ]
+       },
+       "node": {
+          "executors": 1,
+          "mode": "exclusive",
+          "labels": ["master"]
+       }
+    }
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "role[base]",
+    "recipe[git]",
+    "recipe[jenkins::server]",
+    "recipe[jenkins::proxy]"
+  ],
+  "env_run_lists": {
+  }
+}
+
+
