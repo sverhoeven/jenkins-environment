@@ -83,7 +83,7 @@ copy /etc/chef-server/admin.pem + /etc/chef-server/chef-validator.pem from chef.
 
 
 Test with `knife user list`.
-Upload the environment, cookbooks and roles.
+Upload the environment, data bags, cookbooks and roles.
 
 Jenkins
 =======
@@ -109,13 +109,13 @@ Batch queue nodes
     sudo vmbuilder kvm ubuntu -o -c vmbuilder/slurm2.cfg -d kvm-slurm2
     #Start vm and login
     virsh autostart slurm2
-    knife bootstrap slurm2.internal.esciencetest.nl -E jenkins -x stefanv --sudo --run-list "role[jenkins-slave],role[slurm-controller],role['gridengine-exec]"
+    knife bootstrap slurm2.internal.esciencetest.nl -E jenkins -x stefanv --sudo --run-list "role[jenkins-slave],role[slurm],role['gridengine-exec]"
 
 
     sudo vmbuilder kvm ubuntu -o -c vmbuilder/gridengine1.cfg -d kvm-gridengine1
     #Start vm and login
     virsh autostart gridengine1
-    knife bootstrap gridengine1.internal.esciencetest.nl -E jenkins -x stefanv --sudo --run-list "role[jenkins-slave],role[gridengine-master],role[gridengine-exec],role[slurm-compute]"
+    knife bootstrap gridengine1.internal.esciencetest.nl -E jenkins -x stefanv --sudo --run-list "role[jenkins-slave],role[gridengine-master],role[gridengine-exec],role[slurm]"
     # after exec hosts are added the master should be updated 
     knife ssh "role:gridengine-master" "sudo chef-client"
 
