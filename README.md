@@ -18,6 +18,7 @@ Nodes set to exclusive usage, will only run jenkins jobs have specified them.
 Virtualization machine
 ======================
 
+Due to Guest can reach outside network, but can't reach host (macvtap) (see http://wiki.libvirt.org/page/Guest_can_reach_outside_network,_but_can't_reach_host_(macvtap)) install 
 openvswitch on vmhost with http://blog.scottlowe.org/2012/08/17/installing-kvm-and-open-vswitch-on-ubuntu/
 
 See http://www.cryptocracy.com/blog/2012/05/12/bootstrapping-chef/ and https://github.com/borjasotomayor/demogrid/ http://confluence.globus.org/display/DEMOGRID/Running+with+ubuntu-vm-builder
